@@ -11,12 +11,12 @@ export async function getCryptos() {
     }
 }
 
-export async function fetchCurrentCryptoPrice(pair:Pair) {
+export async function fetchCurrentCryptoPrice(pair: Pair) {
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${pair.cryptocurrency}&tsyms=${pair.currency}`
-    const {data: {DISPLAY}} = await axios(url)
+    const { data: { DISPLAY } } = await axios(url)
 
     const result = CryptoPriceSchema.safeParse(DISPLAY[pair.cryptocurrency][pair.currency])
-    if(result.success) {
+    if (result.success) {
         return result.data
     }
 }

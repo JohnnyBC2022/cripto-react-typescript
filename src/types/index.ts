@@ -1,4 +1,4 @@
-import {z} from 'zod'
+import { z } from 'zod'
 import { CurrencySchema, CryptoCurrencyResponseSchema, PairSchema, CryptoPriceSchema } from '../schema/crypto-schema'
 
 export type Currency = z.infer<typeof CurrencySchema>

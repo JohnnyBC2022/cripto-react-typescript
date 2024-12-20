@@ -1,43 +1,40 @@
 import { useCryptoStore } from "../store";
-import {currencies} from "../data"
+import { currencies } from "../data";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Pair } from "../types";
 import ErrorMessage from "./ErrorMessage";
 
 const CriptoSearchForm = () => {
-  const cryptocurrencies = useCryptoStore(state=> state.cryptocurrencies)
-  const fetchData = useCryptoStore(state=> state.fetchData)
+  const cryptocurrencies = useCryptoStore((state) => state.cryptocurrencies);
+  const fetchData = useCryptoStore((state) => state.fetchData);
 
   const [pair, setPair] = useState<Pair>({
-    currency: '',
-    cryptocurrency: ''
-  })
+    currency: "",
+    cryptocurrency: "",
+  });
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) =>{
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setPair({
       ...pair,
-      [e.target.name]: e.target.value
-    })
-  }
-  const [error, setError] = useState('')
+      [e.target.name]: e.target.value,
+    });
+  };
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) =>{
-    e.preventDefault()
-    if(Object.values(pair).includes('')){
-      setError('Todos los campos son obligatorios')
-      return
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (Object.values(pair).includes("")) {
+      setError("Todos los campos son obligatorios");
+      return;
     }
 
-    setError('')
+    setError("");
     // Consultar la API
-    fetchData(pair)
-  }
+    fetchData(pair);
+  };
 
   return (
-    <form
-      className="form"
-      onSubmit={handleSubmit}
-    >
+    <form className="form" onSubmit={handleSubmit}>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <div className="field">
         <label htmlFor="currency">Moneda:</label>
@@ -48,25 +45,26 @@ const CriptoSearchForm = () => {
           value={pair.currency}
         >
           <option value="">-- Seleccione --</option>
-          {currencies.map(currency =>
-            (<option key={currency.code} value={currency.code}>{currency.name}</option>)
-          )}
+          {currencies.map((currency) => (
+            <option key={currency.code} value={currency.code}>
+              {currency.name}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="field">
         <label htmlFor="cryptocurrency">Criptomoneda:</label>
         <select
-          name="cryptocurrency" id="cryptocurrency"
+          name="cryptocurrency"
+          id="cryptocurrency"
           onChange={handleChange}
           value={pair.cryptocurrency}
         >
           <option value="">-- Seleccione --</option>
-          {cryptocurrencies.map(crypto => (
-            <option
-              key={crypto.CoinInfo.Name}
-              value={crypto.CoinInfo.Name}
-            >{crypto.CoinInfo.FullName}
+          {cryptocurrencies.map((crypto) => (
+            <option key={crypto.CoinInfo.Name} value={crypto.CoinInfo.Name}>
+              {crypto.CoinInfo.FullName}
             </option>
           ))}
         </select>

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import CriptoSearchForm from "./components/CriptoSearchForm";
-import { useCryptoStore} from "./store"
+import { useCryptoStore } from "./store";
 import CriptoPriceDisplay from "./components/CriptoPriceDisplay";
-import './spinner.css'
+import "./spinner.css";
 
 function App() {
-  const fetchCryptos = useCryptoStore(state => state.fetchCryptos)
+  const fetchCryptos = useCryptoStore((state) => state.fetchCryptos);
 
-  useEffect(()=>{
-    fetchCryptos()
-  },[])
+  useEffect(() => {
+    fetchCryptos();
+  }, []);
 
   return (
     <>

@@ -21,7 +21,7 @@ export const useCryptoStore = create<CryptoStore>()(devtools((set) => ({
         CHANGEPCT24HOUR: '',
         LASTUPDATE: ''
     },
-    loading:false,
+    loading: false,
     fetchCryptos: async () => {
         const cryptocurrencies = await getCryptos()
         set(() => ({
